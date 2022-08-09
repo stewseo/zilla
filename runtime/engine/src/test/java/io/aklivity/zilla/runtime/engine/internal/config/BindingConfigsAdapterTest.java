@@ -59,20 +59,17 @@ public class BindingConfigsAdapterTest
     {
         String text =
                 "{" +
-                    "\"test\":" +
-                    "{" +
+                        "\"test\":" +
+                        "{" +
                         "\"type\": \"test\"," +
                         "\"kind\": \"server\"," +
                         "\"routes\":" +
                         "[" +
                         "]" +
-                    "}" +
-                "}";
-
-
+                        "}" +
+                        "}";
 
         BindingConfig[] bindings = jsonb.fromJson(text, BindingConfig[].class);
-        assertEquals("{\"test\":{\"type\": \"test\",\"kind\": \"server\",\"routes\":[]}}", Arrays.toString(bindings));
 
         assertThat(bindings[0], not(nullValue()));
         assertThat(bindings[0].kind, equalTo(SERVER));
