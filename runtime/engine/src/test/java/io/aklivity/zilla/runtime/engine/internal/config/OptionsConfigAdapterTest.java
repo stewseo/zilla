@@ -14,7 +14,6 @@
  * under the License.
  */
 package io.aklivity.zilla.runtime.engine.internal.config;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -51,8 +50,8 @@ public class OptionsConfigAdapterTest
     {
         String text =
                 "{" +
-                    "\"mode\": \"test\"" +
-                "}";
+                        "\"mode\": \"test\"" +
+                        "}";
 
         TestBindingOptionsConfig options = (TestBindingOptionsConfig) jsonb.fromJson(text, OptionsConfig.class);
 
@@ -76,8 +75,8 @@ public class OptionsConfigAdapterTest
     {
         String text =
                 "{" +
-                    "\"mode\": \"test\"" +
-                "}";
+                        "\"mode\": \"test\"" +
+                        "}";
 
         adapter.adaptType(null);
         TestBindingOptionsConfig options = (TestBindingOptionsConfig) jsonb.fromJson(text, OptionsConfig.class);

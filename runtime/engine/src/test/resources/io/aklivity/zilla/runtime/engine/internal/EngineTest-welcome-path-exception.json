@@ -1,0 +1,20 @@
+{
+  "bindings":
+  {
+    "test0":
+    {
+      "http_filesystem_proxy0":
+      {
+        "type": "test",
+        "kind": "server",
+        "routes":
+        [
+          {
+            "exit": "test1"
+          }
+        ],
+        "exit": "test2"
+      }
+    }
+  }
+}

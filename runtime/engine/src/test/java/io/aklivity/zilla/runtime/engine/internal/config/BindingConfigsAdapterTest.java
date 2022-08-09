@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertEquals;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -38,6 +39,8 @@ import io.aklivity.zilla.runtime.engine.config.BindingConfig;
 import io.aklivity.zilla.runtime.engine.config.RouteConfig;
 import io.aklivity.zilla.runtime.engine.test.internal.binding.config.TestBindingOptionsConfig;
 
+import java.util.Arrays;
+
 public class BindingConfigsAdapterTest
 {
     private Jsonb jsonb;
@@ -48,6 +51,7 @@ public class BindingConfigsAdapterTest
         JsonbConfig config = new JsonbConfig()
                 .withAdapters(new BindingConfigsAdapter());
         jsonb = JsonbBuilder.create(config);
+
     }
 
     @Test
@@ -65,7 +69,10 @@ public class BindingConfigsAdapterTest
                     "}" +
                 "}";
 
+
+
         BindingConfig[] bindings = jsonb.fromJson(text, BindingConfig[].class);
+        assertEquals("{\"test\":{\"type\": \"test\",\"kind\": \"server\",\"routes\":[]}}", Arrays.toString(bindings));
 
         assertThat(bindings[0], not(nullValue()));
         assertThat(bindings[0].kind, equalTo(SERVER));
