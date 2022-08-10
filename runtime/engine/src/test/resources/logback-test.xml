@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug = "true">
+
+    <!-- debug logs for console output -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+    <appender name="OUTPUT" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder>
+            <pattern>%date %highlight(%-5level) %cyan(%logger{5}@[%-4.30thread]) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- debug logs for runtime/engine/main to engine_main.log -->
+    <appender name="src.test" class="ch.qos.logback.core.FileAppender">
+        <withJansi>true</withJansi>
+        <file>src/logback/engine_test.log</file>
+        <encoder>
+            <fileNamePattern>${LOG_DIR}/%d{yyyy/MM}/${LOG_FILE}.gz</fileNamePattern>
+            <pattern>%-4relative [%thread] %highlight(%-5level) %boldGreen(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Log Metrics for runtime/engine/test to engine_test_metrics.log -->
+    <appender name="metrics" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>src/logback/metrics.log"</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>2MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <logger name="src.test" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="metrics" level="TRACE">
+        <appender-ref ref="metrics" />
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="OUTPUT" />
+        <appender-ref ref="stash" />
+    </root>
+</configuration>

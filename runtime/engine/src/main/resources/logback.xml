@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug = "true">
+
+    <!-- Log runtime/engine/binding to binding_logs.html -->
+    <appender name="zilla.engine.main" class="ch.qos.logback.core.FileAppender">
+        <file>src/logback/binding_factory_log.html</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%thread%level%logger%msg</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+            <maxDepthPerThrowable>30</maxDepthPerThrowable>
+            <maxLength>2048</maxLength>
+            <shortenedClassNameLength>20</shortenedClassNameLength>
+            <exclude>sun\.reflect\..*\.invoke.*</exclude>
+            <exclude>net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+            <evaluator class="zilla.engine.main"/>
+            <rootCauseFirst>true</rootCauseFirst>
+            <inlineHash>true</inlineHash>
+            <lineSeparator>\\n</lineSeparator>
+        </throwableConverter>
+    </encoder>
+
+    <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>127.0.0.1:4560</destination>
+
+        <!-- encoder is required -->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+        <providers>
+            <timestamp/>
+            <pattern>
+                <pattern>
+                    {
+                    "custom_constant": "123",
+                    "tags": ["one", "two"],
+                    "logger": "%logger",
+                    "level": "%level",
+                    "thread": "%thread",
+                    "message": "%message",
+                    ...
+                    }
+                </pattern>
+            </pattern>
+        </providers>
+        <logger name="src.main" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT" />
+        </logger>
+</encoder>
+</configuration>

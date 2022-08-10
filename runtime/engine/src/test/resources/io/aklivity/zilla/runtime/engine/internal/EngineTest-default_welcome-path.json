@@ -1,0 +1,26 @@
+{
+  "bindings":
+  {
+    "test0":
+    {
+      "type": "http-filesystem",
+      "kind": "proxy",
+      "options": {
+        "welcome-path": "/index.html"
+      },
+      "routes": [
+        {
+          "when": [
+            {
+              "path": "/{path}"
+            }
+          ],
+          "exit": "filesystem_server0",
+          "with": {
+            "path": "${params.path}"
+          }
+        }
+      ]
+    }
+  }
+}
