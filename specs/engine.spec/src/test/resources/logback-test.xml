@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date [%thread] %-5level %-15logger{15} %X - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="TXT_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/logback_to_ec.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%relative%thread%mdc%level%logger%msg</pattern>
+            </layout>
+        </encoder>
+        <file>logs/engine_test_log.html</file>
+    </appender>
+
+    <appender name="monitor" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter
+                    class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                <prettyPrint>true</prettyPrint>
+            </jsonFormatter>
+            <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+        </layout>
+    </appender>
+
+    <logger name="configSchemaRuleLogger" level="TRACE">
+        <appender-ref ref="monitor" />
+    </logger>
+
+    <logger name="engine.spec.config.MonitorSchemaTest" level="DEBUG" />
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="TXT_FILE" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
