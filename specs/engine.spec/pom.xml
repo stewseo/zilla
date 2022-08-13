@@ -91,13 +91,8 @@
       <version>7.2</version>
     </dependency>
 
-    <dependency>
-      <groupId>co.elastic.apm</groupId>
-      <artifactId>apm-agent-api</artifactId>
-      <version>1.33.0</version>
-    </dependency>
-
 </dependencies>
+
 
   <build>
     <resources>
