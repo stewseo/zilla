@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Fri Aug 12 17:47:04 PDT 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="RelativeTime">RelativeTime</td>
+<td class="Thread">Thread</td>
+<td class="MDC">MDC</td>
+<td class="Level">Level</td>
+<td class="Logger">Logger</td>
+<td class="Message">Message</td>
+</tr>
+
+
+<tr class="info even">
+<td class="RelativeTime">148</td>
+<td class="Thread">main</td>
+<td class="MDC"></td>
+<td class="Level">INFO</td>
+<td class="Logger">org.junit.runners.model.Statement</td>
+<td class="Message">schemaPatchNameio/aklivity/zilla/specs/engine/schema/binding/test.schema.patch.json</td>
+</tr>
+
+<tr class="info odd">
+<td class="RelativeTime">149</td>
+<td class="Thread">main</td>
+<td class="MDC"></td>
+<td class="Level">INFO</td>
+<td class="Logger">org.junit.runners.model.Statement</td>
+<td class="Message">schemaPatchNameio/aklivity/zilla/specs/engine/schema/guard/test.schema.patch.json</td>
+</tr>
+
+<tr class="info even">
+<td class="RelativeTime">150</td>
+<td class="Thread">main</td>
+<td class="MDC"></td>
+<td class="Level">INFO</td>
+<td class="Logger">org.junit.runners.model.Statement</td>
+<td class="Message">schemaPatchNameio/aklivity/zilla/specs/engine/schema/vault/test.schema.patch.json</td>
+</tr>
+
+<tr class="info odd">
+<td class="RelativeTime">151</td>
+<td class="Thread">main</td>
+<td class="MDC"></td>
+<td class="Level">INFO</td>
+<td class="Logger">org.junit.runners.model.Statement</td>
+<td class="Message">configurationRootio/aklivity/zilla/specs/engine/config</td>
+</tr>
+
+<tr class="info even">
+<td class="RelativeTime">294</td>
+<td class="Thread">main</td>
+<td class="MDC"></td>
+<td class="Level">INFO</td>
+<td class="Logger">org.junit.runners.model.Statement</td>
+<td class="Message">JsonSchema
+{&quot;$schema&quot;:&quot;http://json-schema.org/draft-07/schema#&quot;,&quot;title&quot;:&quot;Namespace&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;name&quot;:{&quot;title&quot;:&quot;Name&quot;,&quot;type&quot;:&quot;string&quot;,&quot;pattern&quot;:&quot;^[a-zA-Z]+[a-zA-Z0-9\\._\\-]*$&quot;},&quot;vaults&quot;:{&quot;title&quot;:&quot;Vaults&quot;,&quot;type&quot;:&quot;object&quot;,&quot;patternProperties&quot;:{&quot;^[a-zA-Z]+[a-zA-Z0-9\\._\\-]*$&quot;:{&quot;$ref&quot;:&quot;#/$defs/vault&quot;}},&quot;additionalProperties&quot;:false},&quot;guards&quot;:{&quot;title&quot;:&quot;Guards&quot;,&quot;type&quot;:&quot;object&quot;,&quot;patternProperties&quot;:{&quot;^[a-zA-Z]+[a-zA-Z0-9\\._\\-]*$&quot;:{&quot;$ref&quot;:&quot;#/$defs/guard&quot;}},&quot;additionalProperties&quot;:false},&quot;bindings&quot;:{&quot;title&quot;:&quot;Bindings&quot;,&quot;type&quot;:&quot;object&quot;,&quot;patternProperties&quot;:{&quot;^[a-zA-Z]+[a-zA-Z0-9\\._\\-]*$&quot;:{&quot;$ref&quot;:&quot;#/$defs/binding&quot;}},&quot;additionalProperties&quot;:false}},&quot;additionalProperties&quot;:false,&quot;required&quot;:[&quot;name&quot;],&quot;$defs&quot;:{&quot;vault&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;type&quot;:{&quot;title&quot;:&quot;Type&quot;,&quot;type&quot;:&quot;string&quot;},&quot;options&quot;:{&quot;title&quot;:&quot;Options&quot;,&quot;type&quot;:&quot;object&quot;}},&quot;additionalProperties&quot;:false,&quot;required&quot;:[&quot;type&quot;],&quot;oneOf&quot;:[{&quot;properties&quot;:{&quot;type&quot;:{&quot;const&quot;:&quot;test&quot;}}}]},&quot;guard&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;type&quot;:{&quot;title&quot;:&quot;Type&quot;,&quot;type&quot;:&quot;string&quot;},&quot;options&quot;:{&quot;title&quot;:&quot;Options&quot;,&quot;type&quot;:&quot;object&quot;}},&quot;additionalProperties&quot;:false,&quot;required&quot;:[&quot;type&quot;],&quot;oneOf&quot;:[{&quot;properties&quot;:{&quot;type&quot;:{&quot;const&quot;:&quot;test&quot;},&quot;options&quot;:{&quot;properties&quot;:{&quot;credentials&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;lifetime&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;pattern&quot;:&quot;PT\\d+S&quot;},&quot;challenge&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;pattern&quot;:&quot;PT\\d+S&quot;},&quot;roles&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;string&quot;}}},&quot;additionalProperties&quot;:false}},&quot;additionalProperties&quot;:false}]},&quot;binding&quot;:{&quot;title&quot;:&quot;Binding&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;vault&quot;:{&quot;title&quot;:&quot;Vault&quot;,&quot;type&quot;:&quot;string&quot;},&quot;type&quot;:{&quot;title&quot;:&quot;Type&quot;,&quot;type&quot;:&quot;string&quot;},&quot;kind&quot;:{&quot;title&quot;:&quot;Kind&quot;,&quot;type&quot;:&quot;string&quot;},&quot;options&quot;:{&quot;title&quot;:&quot;Options&quot;,&quot;type&quot;:&quot;object&quot;},&quot;routes&quot;:{&quot;title&quot;:&quot;Routes&quot;,&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;title&quot;:&quot;Route&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;exit&quot;:{&quot;title&quot;:&quot;Exit&quot;,&quot;type&quot;:&quot;string&quot;},&quot;when&quot;:{&quot;title&quot;:&quot;Conditions&quot;,&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;title&quot;:&quot;Condition&quot;,&quot;type&quot;:&quot;object&quot;}},&quot;with&quot;:{&quot;title&quot;:&quot;Override&quot;,&quot;type&quot;:&quot;object&quot;},&quot;guarded&quot;:{&quot;title&quot;:&quot;Guarded&quot;,&quot;type&quot;:&quot;object&quot;,&quot;patternProperties&quot;:{&quot;^[a-zA-Z]+[a-zA-Z0-9\\._\\-]*$&quot;:{&quot;title&quot;:&quot;Roles&quot;,&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;title&quot;:&quot;Role&quot;,&quot;type&quot;:&quot;string&quot;}}}}},&quot;additionalProperties&quot;:false}},&quot;exit&quot;:{&quot;title&quot;:&quot;Exit&quot;,&quot;type&quot;:&quot;string&quot;},&quot;additionalProperties&quot;:false},&quot;required&quot;:[&quot;type&quot;,&quot;kind&quot;],&quot;oneOf&quot;:[{&quot;properties&quot;:{&quot;type&quot;:{&quot;const&quot;:&quot;test&quot;},&quot;kind&quot;:{&quot;enum&quot;:[&quot;server&quot;]},&quot;options&quot;:false},&quot;anyOf&quot;:[{&quot;required&quot;:[&quot;exit&quot;]},{&quot;required&quot;:[&quot;routes&quot;]}]}]}}}</td>
+</tr>
