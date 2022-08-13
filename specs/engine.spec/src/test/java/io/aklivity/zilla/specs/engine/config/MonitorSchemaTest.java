@@ -54,14 +54,14 @@ public class MonitorSchemaTest
     }
 
     @Test
-    public void shouldValidateServerBindingWithOptions()
+    public void shouldValidateServerBindingWith()
     {
         JsonObject config = schema.validate("server.binding.with.routes.and.no.exit.json");
         assertThat(config, not(nullValue()));
     }
 
     @Test(expected = JsonException.class)
-    public void shouldRejectServerBindingWithoutCorrectOptions()
+    public void shouldRejectServerBindingWithout()
     {
         schema.validate("server.binding.with.no.kind.json");
     }

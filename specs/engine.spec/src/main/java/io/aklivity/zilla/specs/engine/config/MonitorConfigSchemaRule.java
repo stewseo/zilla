@@ -6,10 +6,6 @@ import jakarta.json.JsonPatch;
 import jakarta.json.JsonReader;
 import jakarta.json.spi.JsonProvider;
 import jakarta.json.stream.JsonParser;
-import org.junit.*;
-import org.junit.rules.ExternalResource;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -27,10 +23,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public final class MonitorConfigSchemaRule extends TestWatcher {
     private JsonProvider provider;
     private String schemaName = "io/aklivity/zilla/specs/engine/schema/engine.schema.json";
@@ -40,19 +32,22 @@ public final class MonitorConfigSchemaRule extends TestWatcher {
     private static final Logger logger = LoggerFactory.getLogger("configSchemaRuleLogger");
 
     public MonitorConfigSchemaRule schema(
-            String schemaName) {
+            String schemaName)
+    {
         this.schemaName = schemaName;
         logger.info("schema: " + schemaName);
         return this;
     }
     public MonitorConfigSchemaRule schemaPatch(
-            String schemaPatchName) {
+            String schemaPatchName)
+    {
         this.schemaPatchNames.add(schemaPatchName);
         logger.info("schemaPatch: " + schemaPatchName);
         return this;
     }
     public MonitorConfigSchemaRule configurationRoot(
-            String configurationRoot) {
+            String configurationRoot)
+    {
         this.configurationRoot = configurationRoot;
         logger.info("configurationRoot: " + configurationRoot);
         return this;
@@ -61,7 +56,8 @@ public final class MonitorConfigSchemaRule extends TestWatcher {
     @Override
     public Statement apply(
             Statement base,
-            Description description) {
+            Description description)
+    {
         Objects.requireNonNull(schemaName, "schema");
         schemaPatchNames.forEach(n -> Objects.requireNonNull(n, "schemaPatch"));
 
@@ -72,6 +68,7 @@ public final class MonitorConfigSchemaRule extends TestWatcher {
         JsonProvider schemaProvider = JsonProvider.provider();
         JsonReader schemaReader = schemaProvider.createReader(schemaInput);
         JsonObject schemaObject = schemaReader.readObject();
+        logger.debug("JsonObject: " + schemaObject);
 
         for (String schemaPatchName : schemaPatchNames) {
             InputStream schemaPatchInput = findResource.apply(schemaPatchName);
