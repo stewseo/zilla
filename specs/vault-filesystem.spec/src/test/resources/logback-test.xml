@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration debug="true">
+
+    <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/stash1_spec.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>logs/stash1_spec.%d{yyyy-MM-dd}.log</fileNamePattern>
+        <maxHistory>7</maxHistory>
+    </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <pattern>
+                    <pattern>
+                        {
+                        "logger": "%logger",
+                        "level": "%level",
+                        "thread": "%thread",
+                        "message": "%message"
+                        }
+                    </pattern>
+            </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender name="stash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+    <listener class="net.logstash.logback.appender.listener.FailureSummaryLoggingAppenderListener">
+        <messagePattern>%clientHost [%date] "%requestURL" %statusCode %bytesSent</messagePattern>
+        <loggerName>net.logstash.logback.appender.listener.FailureSummaryLoggingAppenderListener</loggerName>
+    </listener>
+
+    </appender>
+
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/stash.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/stash.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <timestamp/>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <timestamp>time</timestamp>
+                <message>msg</message>
+                <stackTrace>stacktrace</stackTrace>
+            </fieldNames>
+            <providers>
+                <provider class="io.aklivity.zilla.specs.engine.config.CustomJsonProvider">
+                </provider>
+            </providers>
+        </encoder>
+    </appender>
+
+    <logger name="jsonLogger" level="TRACE">
+        <appender-ref ref="json" />
+    </logger>
+
+    <root level="all">
+        <appender-ref ref="tcp" />
+        <appender-ref ref="STASH" />
+        <appender-ref ref="json" />
+    </root>
+</configuration>

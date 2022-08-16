@@ -15,23 +15,11 @@
  */
 package io.aklivity.zilla.specs.engine.config;
 
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.read.ListAppender;
 import jakarta.json.JsonException;
 import jakarta.json.JsonObject;
 
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
@@ -40,7 +28,7 @@ import static org.hamcrest.Matchers.nullValue;
 public class MonitorSchemaTest
 {
     @Rule
-    public final MonitorConfigSchemaRule schema = new MonitorConfigSchemaRule()
+    public final LogConfigSchemaRule schema = new LogConfigSchemaRule()
             .schemaPatch("io/aklivity/zilla/specs/engine/schema/binding/test.schema.patch.json")
             .schemaPatch("io/aklivity/zilla/specs/engine/schema/guard/test.schema.patch.json")
             .schemaPatch("io/aklivity/zilla/specs/engine/schema/vault/test.schema.patch.json")

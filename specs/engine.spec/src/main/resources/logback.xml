@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration debug="true">
+
+    <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/config_schema_rule.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/config_schema_rule.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <pattern>
+                    <pattern>
+                        {
+                        "message": "%message"
+                        "logger": "%logger",
+                        "level": "%level",
+                        "level": "%level_value",
+                        "thread": "%thread"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/config_schema.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/stash.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <pattern>
+                    <pattern>
+                        {
+                        "logger": "%logger",
+                        "level": "%level",
+                        "thread": "%thread",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <logger name="jsonLogger" level="TRACE">
+        <appender-ref ref="json" />
+    </logger>
+
+    <root level="all">
+        <appender-ref ref="STASH" />
+        <appender-ref ref="json" />
+    </root>
+</configuration>
