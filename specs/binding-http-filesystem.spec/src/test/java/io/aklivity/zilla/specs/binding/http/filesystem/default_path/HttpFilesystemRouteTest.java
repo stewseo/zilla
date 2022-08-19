@@ -59,6 +59,7 @@ public class HttpFilesystemRouteTest
             assertEquals(2, config.size());
             assertEquals("\"test\"", config.getValue("/name").toString());
 
+            assertEquals("test", config.getValue("/binding").toString());
         }
     }
 

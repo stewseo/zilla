@@ -1,0 +1,36 @@
+# http.filesystem
+Listens on http port `8080` and serves files from `web` subdirectory.
+Listens on https port `9090` and serves files from `web` subdirectory.
+
+test http-filesystem proxy path to
+'web' subdirectory file: index.html
+
+test http-filesystem proxy options
+welcome_path: index.html
+
+### Start zilla engine
+```bash
+$ docker swarm init
+$ docker stack deploy -c stack.yml example
+```
+
+### Confirm Trustroot and mount paths
+```bash
+$ docker node inspect --format '{{ .Description.TLSInfo.TrustRoot }}' docker-desktop
+$ docker service inspect --format='{{.Spec.TaskTemplate.ContainerSpec.Mounts}}' example_zilla
+```
+
+### Verify behavior
+```bash
+$ curl http://localhost:8080/
+$ curl http://localhost:8080/index.html
+```
+
+```bash
+$ curl https://localhost:9090
+$ curl --cacert test-ca.crt https://localhost:9090/
+$ curl --cacert test-ca.crt https://localhost:9090/index.html
+
+$ docker stack rm example vossibility
+$ docker system prune -a
+```
